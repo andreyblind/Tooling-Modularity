@@ -1,7 +1,10 @@
+'use strict';
+
 var gulp = require('gulp');
 var connect = require('gulp-connect');
 var jade = require('gulp-jade');
 var rjs = require('gulp-requirejs');
+var sass = require('gulp-sass');
 // add required packages
 
 gulp.task('connect', function() {
@@ -12,6 +15,16 @@ gulp.task('connect', function() {
 	});
 });
 
+gulp.task('sass', function () {
+  return gulp.src('src/sass/*.sass')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('dist/css'));
+});
+ 
+gulp.task('sass:watch', function () {
+  gulp.watch('src/sass/*.sass', ['sass']);
+});
+
 gulp.task('jade', function() {
 	gulp.src('src/jade/*.jade')
 		.pipe(jade())
@@ -19,9 +32,6 @@ gulp.task('jade', function() {
 		.pipe(connect.reload());
 });
 
-gulp.task('sass', function() {
-	// implement sass task
-});
 
 gulp.task('requireJS', function() {
 	// implement bundle.js file uglification
