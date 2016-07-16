@@ -50,6 +50,9 @@ gulp.task('requireJS', function() {
 
 gulp.task('watch', function() {
 	gulp.watch('src/jade/*.jade', ['jade']);
+	gulp.watch('src/js/*', ['requireJS']);
+	gulp.watch('src/sass/*', ['sass'])
+
 	// add watch for .sass and .js files
 });
 
